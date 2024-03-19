@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+import 'package:movie_app/bookmark/bookmarkpage.dart';
+import 'package:movie_app/commingsoon/commingsoonpage.dart';
+import 'package:movie_app/movie/moviepage.dart';
+import 'package:movie_app/profile/profile.dart';
+import 'package:movie_app/search/searchPage.dart';
 
 class HomePage extends StatefulWidget {
- 
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -12,58 +16,58 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+
+  final List<Widget> _widgetOptions = <Widget>[
+    const MoviePage(),
+    const SearchPage(),
+    const CommingsoonPage(),
+    const BookmarkPage(),
+    const ProfilePage()
+
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    // Example navigation, change it according to your requirement
-    if (index == 1) {
-      Navigator.pushNamed(context, '/business'); // Change '/business' to your desired route
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
+      body: Container(
+        color: Colors.blueAccent,
+        child: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.blueAccent,
+        items: const [
+          CurvedNavigationBarItem(
+            child: Icon(Icons.home_outlined),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+          CurvedNavigationBarItem(
+            child: Icon(Icons.search),
+            label: 'Search',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+          CurvedNavigationBarItem(
+            child: Icon(Icons.chat_bubble_outline),
+            label: 'Comming Soon',
+          ),
+          CurvedNavigationBarItem(
+            child: Icon(Icons.newspaper),
+            label: 'Bookmark',
+          ),
+          CurvedNavigationBarItem(
+            child: Icon(Icons.perm_identity),
+            label: 'Profile',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+        onTap: (index) {
+          _onItemTapped(index);
+        },
       ),
     );
   }
