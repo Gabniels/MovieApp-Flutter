@@ -5,12 +5,18 @@ class BookmarkPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return const Scaffold(
-      body: Center(
-        child: Text(
-          'BookMark Page',
+    return const Scaffold(
+    backgroundColor: Colors.blue, // Menambahkan warna latar belakang biru
+    body: Center(
+      child: Text(
+        'Book Mark Page',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 24
         ),
       ),
-    );
+    ),
+  );
   }
 }

@@ -5,12 +5,18 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return const Scaffold(
-      body: Center(
-        child: Text(
-          'Profile Page',
+    return const Scaffold(
+    backgroundColor: Colors.blue, // Menambahkan warna latar belakang biru
+    body: Center(
+      child: Text(
+        'Profile Page',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 24
         ),
       ),
-    );
+    ),
+  );
   }
 }
